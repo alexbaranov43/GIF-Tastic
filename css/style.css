@@ -1,0 +1,40 @@
+body {
+    background: silver;
+
+}
+
+img {
+    height: 200px;
+    width: 200px;
+    margin: 15px;
+}
+
+button {
+    margin: 5px;
+    font-size: 20px;
+    border-radius: 5px;
+    color: white;
+    background: steelblue;
+}
+
+#boxes{
+    width: 100%;
+}
+
+p {
+    margin: 15px;}
+    
+
+#results{
+    float: left;
+    width: 80%;
+}
+
+.images{
+    float: left;
+}
+
+#inputs {
+    float: right;
+    width: 15%;
+}
