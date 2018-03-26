@@ -10,37 +10,55 @@ function displayGIF() {
         console.log(results)
         var results = results.data
         for (i = 0; i < results.length; i++) {
+            var fav = $("<button class='fav'>")
             var gifDiv = $("<div class='images'>")
-            var gif = $("<img class='gifs'>")
+            var gif = $("<img class='gifs'><br>")
             var rating = results[i].rating;
             var p = $("<p>").text("Rating: " + rating);
-            // rating.attr("src", results[i].rating);
-            gif.attr("src", results[i].images.original_still.url);
+            var favorites = [];
+            var favorite = $(".gifs").attr("src")
+            gif.attr("src", results[i].images.fixed_height_still.url);
+            gif.attr("data-still", results[i].images.fixed_height_still.url)
+            gif.attr("data-animate", results[i].images.fixed_height.url);
             gif.attr("data-state", "still");
-            gif.attr("data-still", results[i].images.original_still.url)
-            gif.attr("data-animate", results[i].images.original.url);
+            fav.text("Add to Favorites");
+            gifDiv.prepend(fav)
             gifDiv.prepend(gif);
             gifDiv.prepend(p);
 
             $("#results").prepend(gifDiv);
 
-            $(".gifs").on("click", function(){
+        }
+        $(".gifs").on("click", function () {
 
-                var state = $(this).attr("data-state");
+            var state = $(this).attr("data-state");
+            console.log(this)
+            if (state === "still") {
+                $(this).attr("data-state", "animate")
+                $(this).attr("src", $(this).attr("data-animate"));
+            } else if (state === "animate") {
+                $(this).attr("data-state", "still")
+                $(this).attr("src", $(this).attr("data-still"));
+            }
 
-                if (state === "still"){
-                    $(this).attr("data-state", "animate")
-                    $(this).attr("src", $(this).attr("data-animate"));
-                } else if (state === "animate"){
-                    $(this).attr("data-state", "still")
-                    $(this).attr("src", $(this).attr("data-still"));
-                }
+        })
+
+
+        $(".fav").on("click", function () {
+            event.preventDefault();
+            favorites.push(favorite);
+            console.log(favorite)
+            console.log(favorites)
+            $(".favorites").on("click", function () {
+
+
 
             })
-        
-        
 
-        }
+        })
+
+
+
     })
 }
 
