@@ -1,38 +1,45 @@
-var topics = ["cats", "dogs", "trampolines", "cars", "bikes"];
+var topics = ["8-bit", "nintendo", "sonic", "dogs", "trampolines", "cars", "bikes"];
+$("#results").hide();
+var favorites = [];
 
 function displayGIF() {
+    $("#favorites").hide();
     var topic = $(this).attr("data-name");
     var queryUrl = "https://api.giphy.com/v1/gifs/search?api_key=Zqmlr4sTEvvj2GmCoP9HWA9VlU2MhXIA&q=" + topic + "&limit=10"
     $.ajax({
         url: queryUrl,
         method: "GET",
     }).then(function (results) {
-        console.log(results)
+        // console.log(results)
         var results = results.data
         for (i = 0; i < results.length; i++) {
             var fav = $("<button class='fav'>")
             var gifDiv = $("<div class='images'>")
             var gif = $("<img class='gifs'><br>")
             var rating = results[i].rating;
+            
+            
             var p = $("<p>").text("Rating: " + rating);
-            var favorites = [];
-            var favorite = $(".gifs").attr("src")
             gif.attr("src", results[i].images.fixed_height_still.url);
             gif.attr("data-still", results[i].images.fixed_height_still.url)
             gif.attr("data-animate", results[i].images.fixed_height.url);
             gif.attr("data-state", "still");
             fav.text("Add to Favorites");
-            gifDiv.prepend(fav)
-            gifDiv.prepend(gif);
+            fav.attr("src", results[i].images.fixed_height.url)
+
             gifDiv.prepend(p);
-
+            gifDiv.prepend(fav)
+            gifDiv.prepend(gif)
+            //gifDiv.prepend(gif);
+            
             $("#results").prepend(gifDiv);
-
+            $("#results").show();
+          
         }
         $(".gifs").on("click", function () {
 
             var state = $(this).attr("data-state");
-            console.log(this)
+            // console.log(this)
             if (state === "still") {
                 $(this).attr("data-state", "animate")
                 $(this).attr("src", $(this).attr("data-animate"));
@@ -43,24 +50,36 @@ function displayGIF() {
 
         })
 
-
-        $(".fav").on("click", function () {
+        $(".fav").click( function (event) {
             event.preventDefault();
-            favorites.push(favorite);
-            console.log(favorite)
-            console.log(favorites)
-            $(".favorites").on("click", function () {
-
-
-
-            })
-
+            console.log(this)
+            
+            var favorite = $(this).attr("src")
+          favorites.push(favorite);
+             console.log(favorites)
+       //  console.log(favorite)
         })
-
 
 
     })
 }
+
+
+$(".favorites").on("click", function (event) {
+    event.preventDefault();
+    $("#favorites").show();
+    $("#results").hide();
+    $("#favorites").empty();
+    for (i = 0; i < favorites.length; i++) {
+        var favGif = $("<img>")
+        
+        favGif.attr("src", favorites[i]);
+        console.log(favGif.attr("src"));
+        $("#favorites").prepend(favGif);
+    }
+})
+
+
 
 
 function renderButtons() {
@@ -92,5 +111,7 @@ $("#search").on("click", function (event) {
 
 $(document).on("click", ".topic", displayGIF);
 renderButtons();
+$("#results").show();
+$("#favorites").hide();
 
 

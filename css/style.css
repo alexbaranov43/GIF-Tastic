@@ -1,42 +1,69 @@
-body {
-    background: silver;
+h1, .addTopic {
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+}
 
+body {
+    background: cadetblue;
+    font-family: 'Press Start 2P', cursive
+
+}
+
+i {
+    align-content: center;
 }
 
 img {
     height: 200px;
     width: 200px;
     margin: 15px;
+    border: chocolate 7px outset;
+    border-radius: 25px;
 }
 
 button {
     margin: 5px;
-    font-size: 20px;
-    border-radius: 5px;
+    font-size: 15px;
+    border: mediumseagreen 2px groove;
+    border-radius: 10px;
     color: white;
-    background: steelblue;
+    background: chocolate;
+}
+
+button:hover {background-color: #3e8e41}
+
+button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 
 
 #boxes{
     width: 100%;
+    text-align: center
 }
 
 p {
     margin: 15px;}
     
 
-#results{
-    float: left;
-    width: 80%;
+#results, #favorites{
+    margin: 5% auto;
+    width: 100%;
+    text-align: center;
 }
 
 .images{
     float: left;
 }
+#newGifs{
+    width: 30%;
+    text-align: center;
+}
 
 #inputs {
-    float: right;
-    width: 15%;
+    width: 100%;
+    text-align: center;
 }

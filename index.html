@@ -1,31 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>GIF-Tastic</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="Icons8-Ios7-Household-Vacuum-Cleaner.ico">
 </head>
+
 <body>
+    <h1>GIF-Tastic
+        <i class="w3-jumbo w3-spin fa fa-file"></i>
+    </h1>
+
+    <div id="inputs">
+        <form id="topicForm">
+            <label for="newGifs" class="addTopic">Add A Topic</label>
+            <br>
+            <input id="newGifs" type="text" placeholder="Enter Topic Here">
+            <input id="search" type="submit" value="Search">
+        </form>
+        <button class="favorites">Favorites</button>
+    </div>
     <div id="boxes">
-        </div>
+
+    </div>
 
     <div id="results">
 
     </div>
-    <div id="inputs">
-        <form id="topicForm">
-        <label for="newGifs">Add A Topic</label>
-        <br>    
-        <input id="newGifs" type="text">
-        <input id="search" type="submit" value="Search">
-        </form>
-        <button class="favorites">Favorites</button>
+    <div id="favorites">
+
     </div>
-    
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="javascript.js"></script>
 </body>
+
 </html>
