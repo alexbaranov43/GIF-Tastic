@@ -1,7 +1,7 @@
 var topics = ["8-bit", "nintendo", "sonic", "dogs", "trampolines", "cars", "bikes"];
 $("#results").hide();
 var favorites = [];
-
+var favorites = JSON.parse(localStorage.getItem("favorites"));
 function displayGIF() {
     $("#favorites").hide();
     var topic = $(this).attr("data-name");
@@ -13,6 +13,7 @@ function displayGIF() {
         // console.log(results)
         var results = results.data
         for (i = 0; i < results.length; i++) {
+            
             var fav = $("<button class='fav'>")
             var gifDiv = $("<div class='images'>")
             var gif = $("<img class='gifs'><br>")
@@ -55,8 +56,9 @@ function displayGIF() {
             console.log(this)
             
             var favorite = $(this).attr("src")
-          favorites.push(favorite);
+            favorites.push(favorite);
              console.log(favorites)
+             localStorage.setItem("favorites", JSON.stringify(favorites))
        //  console.log(favorite)
         })
 
@@ -70,14 +72,20 @@ $(".favorites").on("click", function (event) {
     $("#favorites").show();
     $("#results").hide();
     $("#favorites").empty();
+    
+
     for (i = 0; i < favorites.length; i++) {
+        
         var favGif = $("<img>")
         
         favGif.attr("src", favorites[i]);
         console.log(favGif.attr("src"));
         $("#favorites").prepend(favGif);
     }
+
+    
 })
+
 
 
 
