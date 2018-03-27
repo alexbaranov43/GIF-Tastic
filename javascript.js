@@ -1,25 +1,28 @@
 var topics = ["8-bit", "nintendo", "sonic", "dogs", "trampolines", "cars", "bikes"];
 $("#results").hide();
 var favorites = [];
-var favorites = JSON.parse(localStorage.getItem("favorites"));
+
 function displayGIF() {
     $("#favorites").hide();
     var topic = $(this).attr("data-name");
+    $("#results").empty();
+
     var queryUrl = "https://api.giphy.com/v1/gifs/search?api_key=Zqmlr4sTEvvj2GmCoP9HWA9VlU2MhXIA&q=" + topic + "&limit=10"
     $.ajax({
         url: queryUrl,
         method: "GET",
     }).then(function (results) {
+        //$("#results").empty();
         // console.log(results)
         var results = results.data
         for (i = 0; i < results.length; i++) {
-            
+
             var fav = $("<button class='fav'>")
             var gifDiv = $("<div class='images'>")
             var gif = $("<img class='gifs'><br>")
             var rating = results[i].rating;
-            
-            
+
+
             var p = $("<p>").text("Rating: " + rating);
             gif.attr("src", results[i].images.fixed_height_still.url);
             gif.attr("data-still", results[i].images.fixed_height_still.url)
@@ -32,10 +35,10 @@ function displayGIF() {
             gifDiv.prepend(fav)
             gifDiv.prepend(gif)
             //gifDiv.prepend(gif);
-            
+
             $("#results").prepend(gifDiv);
             $("#results").show();
-          
+
         }
         $(".gifs").on("click", function () {
 
@@ -51,15 +54,15 @@ function displayGIF() {
 
         })
 
-        $(".fav").click( function (event) {
+        $(".fav").click(function (event) {
             event.preventDefault();
             console.log(this)
-            
+
             var favorite = $(this).attr("src")
             favorites.push(favorite);
-             console.log(favorites)
-             localStorage.setItem("favorites", JSON.stringify(favorites))
-       //  console.log(favorite)
+            console.log(favorites)
+            localStorage.setItem("favorites", JSON.stringify(favorites))
+            //  console.log(favorite)
         })
 
 
@@ -72,18 +75,18 @@ $(".favorites").on("click", function (event) {
     $("#favorites").show();
     $("#results").hide();
     $("#favorites").empty();
-    
 
+    var favorites = JSON.parse(localStorage.getItem("favorites"));
     for (i = 0; i < favorites.length; i++) {
-        
+
         var favGif = $("<img>")
-        
+
         favGif.attr("src", favorites[i]);
         console.log(favGif.attr("src"));
         $("#favorites").prepend(favGif);
     }
 
-    
+
 })
 
 
@@ -119,6 +122,7 @@ $("#search").on("click", function (event) {
 
 $(document).on("click", ".topic", displayGIF);
 renderButtons();
+
 $("#results").show();
 $("#favorites").hide();
 
