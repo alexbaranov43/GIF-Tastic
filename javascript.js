@@ -31,9 +31,9 @@ function displayGIF() {
             fav.text("Add to Favorites");
             fav.attr("src", results[i].images.fixed_height.url)
 
-            gifDiv.prepend(p);
             gifDiv.prepend(fav)
             gifDiv.prepend(gif)
+            gifDiv.prepend(p);
             //gifDiv.prepend(gif);
 
             $("#results").prepend(gifDiv);
